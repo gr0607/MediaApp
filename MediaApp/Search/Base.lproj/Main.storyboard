@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Search View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="SearchViewController" customModule="MediaApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Fln-n7-FYt">
+                                <rect key="frame" x="0.0" y="60" width="414" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kuM-Cr-Rhj">
+                                <rect key="frame" x="20" y="127" width="374" height="32"/>
+                                <segments>
+                                    <segment title="Music"/>
+                                    <segment title="Films"/>
+                                    <segment title="E-book"/>
+                                    <segment title="Tv-shows"/>
+                                </segments>
+                            </segmentedControl>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QE9-y6-RIK">
+                                <rect key="frame" x="0.0" y="166" width="414" height="696"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QE9-y6-RIK" firstAttribute="top" secondItem="kuM-Cr-Rhj" secondAttribute="bottom" constant="8" id="JJb-D6-aRl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kuM-Cr-Rhj" secondAttribute="trailing" constant="20" id="R1G-r2-rGl"/>
+                            <constraint firstItem="kuM-Cr-Rhj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Sf5-kI-qXh"/>
+                            <constraint firstItem="kuM-Cr-Rhj" firstAttribute="top" secondItem="Fln-n7-FYt" secondAttribute="bottom" constant="16" id="dyk-pV-pAa"/>
+                            <constraint firstItem="Fln-n7-FYt" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="gVJ-Nl-xXu"/>
+                            <constraint firstItem="QE9-y6-RIK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="lEO-qx-WzW"/>
+                            <constraint firstItem="QE9-y6-RIK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="nV8-c3-KDk"/>
+                            <constraint firstItem="Fln-n7-FYt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="qrZ-oe-T4G"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="QE9-y6-RIK" secondAttribute="bottom" id="vVN-12-Zk8"/>
+                            <constraint firstItem="Fln-n7-FYt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="zPg-4E-YfV"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="myTable" destination="QE9-y6-RIK" id="C58-mo-Nnx"/>
+                        <outlet property="searchBar" destination="Fln-n7-FYt" id="i8E-z2-laW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="105.79710144927537" y="88.392857142857139"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
