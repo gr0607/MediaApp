@@ -8,12 +8,13 @@
 
 import UIKit
 
-protocol SearchDisplayLogic: class {
+protocol SearchDisplayLogic: AnyObject {
   func displayData(viewModel: Search.Model.ViewModel.ViewModelData)
 }
 
 class SearchViewController: UIViewController, SearchDisplayLogic {
 
+    private var musicViewModel = MusicViewModel.init(cells: [])
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var myTable: UITableView!
     
@@ -56,18 +57,57 @@ class SearchViewController: UIViewController, SearchDisplayLogic {
   override func viewDidLoad() {
     super.viewDidLoad()
     searchBar.delegate = self
+    myTable.dataSource = self
+    myTable.delegate = self
+    
+    let nib = UINib(nibName: "InfoCell", bundle: nil)
+    myTable.register(nib, forCellReuseIdentifier: InfoCell.reuseId)
   }
-  
-  func displayData(viewModel: Search.Model.ViewModel.ViewModelData) {
 
-  }
-  
+    func displayData(viewModel: Search.Model.ViewModel.ViewModelData) {
+        switch viewModel {
+        case .displayMusic(let musicViewModel):
+            self.musicViewModel = musicViewModel
+            myTable.reloadData()
+        case .bookViewModel:
+            print("book")
+        }
+    }
+    
+    
 }
 
+//MARK: - UISearchBarDelegate
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
         self.interactor?.makeRequest(request: Search.Model.Request.RequestType.getMusic(music: searchText))
     }
     
+}
+
+//MARK: - UITableViewDataSource
+extension SearchViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return musicViewModel.cells.count 
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: InfoCell.reuseId, for: indexPath) as? InfoCell
+        
+        guard let infoCell = cell else { return UITableViewCell() }
+        
+        let musicViewModel = musicViewModel.cells[indexPath.row]
+        infoCell.set(infoCellModel: musicViewModel)
+        
+        return infoCell
+    }
+}
+
+//MARK: - UITableViewDelegate
+
+extension SearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 84
+    }
 }

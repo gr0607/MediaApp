@@ -19,16 +19,25 @@ enum Search {
     }
     struct Response {
       enum ResponseType {
-        case presentMusic
+        case presentMusic(searchResponse: SearchResponse?)
         case presentBooks
       }
     }
     struct ViewModel {
       enum ViewModelData {
-        case musicViewModel
+        case displayMusic(musicViewModel: MusicViewModel)
         case bookViewModel
       }
     }
   }
-  
+}
+
+struct MusicViewModel {
+    struct MusicCell {
+        var trackName: String
+        var artistName: String
+        var artworkUrl100: String?
+    }
+    
+    let cells: [MusicCell]
 }

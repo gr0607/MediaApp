@@ -13,7 +13,8 @@ protocol SearchBusinessLogic {
 }
 
 class SearchInteractor: SearchBusinessLogic {
-
+    
+  var networkService = NetworkService()
   var presenter: SearchPresentationLogic?
   var service: SearchService?
   
@@ -24,9 +25,10 @@ class SearchInteractor: SearchBusinessLogic {
     
     switch request{
     
-    case .getMusic(music: _):
-        presenter?.presentData(response: Search.Model.Response.ResponseType.presentMusic)
-        //connect to server for music
+    case .getMusic(let searchMusic):
+        networkService.fetchTracks(searchText: searchMusic) { [weak self] searchResponse in
+            self?.presenter?.presentData(response: Search.Model.Response.ResponseType.presentMusic(searchResponse: searchResponse))
+        }
     case .getBook(book: let book):
         presenter?.presentData(response: Search.Model.Response.ResponseType.presentBooks)
     }
